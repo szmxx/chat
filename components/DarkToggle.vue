@@ -1,31 +1,25 @@
-<!--
- * @Author: cola
- * @Date: 2023-09-09 00:59:50
- * @LastEditors: cola
- * @Description:
--->
 <script setup lang="ts">
-const color = useColorMode();
+  const color = useColorMode()
 
-useHead({
-  meta: [
-    {
-      id: "theme-color",
-      name: "theme-color",
-    },
-  ],
-});
+  useHead({
+    meta: [
+      {
+        id: 'theme-color',
+        name: 'theme-color',
+      },
+    ],
+  })
 
-function toggleDark() {
-  color.preference = color.value === "dark" ? "light" : "dark";
-}
+  function toggleDark() {
+    color.preference = color.value === 'dark' ? 'light' : 'dark'
+  }
 </script>
 
 <template>
-  <button class="cursor-pointer" @click="toggleDark">
+  <button class="cursor-pointer rr-block" @click="toggleDark">
     <div
-      class="i-carbon-sun"
-      :class="{ 'i-carbon-moon!': color?.preference === 'dark' }"
+      class="i-ion-sunny-sharp"
+      :class="{ 'i-ion-moon-sharp!': color?.preference === 'dark' }"
     />
   </button>
 </template>

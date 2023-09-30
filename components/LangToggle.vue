@@ -6,7 +6,7 @@
 -->
 <template>
   <NuxtLink :to="switchLocalePath(locale === 'en' ? 'zh-CN' : 'en')">
-    <div i-carbon-translate></div>
+    <div i-ion-language></div>
   </NuxtLink>
 </template>
 

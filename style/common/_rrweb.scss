@@ -1,0 +1,47 @@
+.rr-player {
+  background: rgba(var(--fill-default)) !important;
+  box-shadow: none !important;
+}
+
+.replayer-wrapper iframe {
+  @apply rounded-1;
+}
+
+.rr-controller {
+  background: rgba(var(--fill-default)) !important;
+
+  /* stylelint-disable-next-line selector-class-pattern */
+  .rr-progress__handler {
+    background: rgba(var(--color-primary)) !important;
+  }
+  /* stylelint-disable-next-line selector-class-pattern */
+  .rr-timeline__time {
+    color: rgba(var(--text-primary)) !important;
+  }
+  /* stylelint-disable-next-line selector-class-pattern */
+  .rr-controller__btns {
+    .switch {
+      display: none !important;
+    }
+  }
+
+  button.active {
+    width: 20px !important;
+    height: 20px !important;
+    background: rgba(var(--color-primary)) !important;
+  }
+
+  button svg {
+    @apply p-0.3 text-xl;
+
+    background: #fff !important;
+  }
+
+  button:last-child {
+    display: none !important;
+  }
+}
+
+.replayer-mouse {
+  display: none;
+}

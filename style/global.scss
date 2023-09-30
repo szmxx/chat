@@ -1,5 +1,9 @@
 @use './theme/index.scss';
 @use './common/mixin' as *;
+@use './common/animation';
+@use './common//loading';
+@use './common/rrweb';
+@use './common/component';
 
 /* stylelint-disable-next-line selector-id-pattern */
 html,
@@ -8,6 +12,10 @@ body,
 #nuxt-test {
   @include scrollbar;
   @apply w-full h-full overflow-hidden bg-default text-color font-sans p-0 m-0 text-base;
+}
+
+.nonescrollbar {
+  @include scrollbar;
 }
 
 *,

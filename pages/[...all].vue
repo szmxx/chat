@@ -1,21 +1,15 @@
-<!--
- * @Author: cola
- * @Date: 2023-08-06 17:42:54
- * @LastEditors: cola
- * @Description:
--->
 <script setup lang="ts">
-const router = useRouter();
+  const router = useRouter()
 </script>
 
 <template>
-  <main p="x4 y10" text="center teal-700 dark:gray-200">
-    <div text-4xl>
-      <div i-carbon-warning inline-block />
+  <main text="center text-success flex flex-col gap-y-4">
+    <div text-xl>
+      <div i-ion-warning inline-block />
     </div>
     <div>Not found</div>
     <div>
-      <button text-sm btn m="3 t8" @click="router.back()">Back</button>
+      <button text-sm @click="router.back()">Back</button>
     </div>
   </main>
 </template>

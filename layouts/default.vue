@@ -4,13 +4,9 @@
  * @LastEditors: cola
  * @Description:
 -->
-<script setup>
-  const { t } = useI18n()
-</script>
+<script setup></script>
 <template>
-  <main class="center h-full w-full flex-col gap-y-2">
+  <main class="center bg h-full w-full flex-col gap-y-2">
     <slot />
-    <Footer />
-    <div class="text-auxiliary">[{{ t('default_layout') }}]</div>
   </main>
 </template>

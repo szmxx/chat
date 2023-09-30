@@ -28,7 +28,8 @@
   }
 
   &::-webkit-scrollbar {
-    width: 6px;
+    display: none;
+    width: 0;
   }
 
   &::-webkit-scrollbar-thumb {

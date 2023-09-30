@@ -15,11 +15,20 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@vite-pwa/nuxt',
     '@nuxtjs/i18n',
+    '@nuxtseo/module',
   ],
   runtimeConfig: {
     public: {
       name: process.env.NUXT_APP_NAME,
     },
+  },
+
+  site: {
+    titleSeparator: '·',
+    defaultLocale: 'zh-CN',
+    name: process.env.NUXT_APP_NAME,
+    indexable: true,
+    url: process.env.NUXT_PUBLIC_SITE_URL,
   },
 
   experimental: {

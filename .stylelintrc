@@ -8,6 +8,7 @@
   "plugins": ["stylelint-order"],
   "customSyntax": "postcss-scss",
   "rules": {
+    "color-function-notation": null,
     "at-rule-no-unknown": [
       true,
       {
@@ -99,7 +100,17 @@
     {
       "files": ["*.(html|vue)", "**/*.(html|vue)"],
       "rules": {
-        "unit-allowed-list": ["em", "rem", "px", "%", "s", "vw", "vh", "ms"]
+        "unit-allowed-list": [
+          "em",
+          "rem",
+          "px",
+          "%",
+          "s",
+          "vw",
+          "vh",
+          "ms",
+          "deg"
+        ]
       },
       "customSyntax": "postcss-html"
     }

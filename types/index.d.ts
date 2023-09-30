@@ -6,9 +6,18 @@
  */
 declare global {
   interface IApi {
-    pageview: number;
-    startAt: number;
+    pageview: number
+    startAt: number
+  }
+  interface IItem {
+    name: string
+    value: unknown
+  }
+  interface IGroupConfig {
+    name: string
+    number: number
+    enabled: boolean
   }
 }
 
-export {};
+export {}
