@@ -1,52 +1,55 @@
 <template>
   <div class="w-full h-full center relative flex-col overflow-hidden">
-    <div
-      v-show="isShowPanel"
-      ref="panelRef"
-      class="w-35% rr-block border-r flex flex-col gap-y-2 <sm:(absolute w-80% bg-default/60 backdrop-blur-8 p-0) z-99 h-full absolute top-0 left-0 p-2"
-    >
-      <UiTab
-        v-model="currentTab"
-        :list="tabList"
-        class="w-full h-full overflow-y-auto"
-        type="card"
+    <ClientOnly>
+      <div
+        v-show="isShowPanel"
+        ref="panelRef"
+        class="w-35% rr-block border-r flex flex-col gap-y-2 <sm:(absolute w-80% bg-default/60 backdrop-blur-8 p-0) z-99 h-full absolute top-0 left-0 p-2"
       >
-        <template #default="{ current }">
-          <ChatConfigTheme
-            v-show="current === 'global'"
-            v-model="msgCount"
-            v-model:disturb="isDisturb"
-            :group="groupConfig"
-            @operate="onThemeOperate"
-            @time="onTime"
-            @bg="onTheme"
-            @group="onGroup"
-          ></ChatConfigTheme>
-          <ChatConfigShell
-            v-show="current === 'shell'"
-            v-model:system="system"
-            v-model="currentTime"
-            @config="onShellConfig"
-          ></ChatConfigShell>
+        <UiTab
+          v-model="currentTab"
+          :list="tabList"
+          class="w-full h-full overflow-y-auto"
+          type="card"
+        >
+          <template #default="{ current }">
+            <ChatConfigTheme
+              v-show="current === 'global'"
+              v-model="msgCount"
+              v-model:disturb="isDisturb"
+              :group="groupConfig"
+              @operate="onThemeOperate"
+              @time="onTime"
+              @bg="onTheme"
+              @group="onGroup"
+            ></ChatConfigTheme>
+            <ChatConfigShell
+              v-show="current === 'shell'"
+              v-model:system="system"
+              v-model="currentTime"
+              @config="onShellConfig"
+            ></ChatConfigShell>
 
-          <ChatConfigObject
-            v-show="current === 'object'"
-            v-model="currentUser"
-            :map="map"
-            :is-group="groupConfig?.enabled"
-            @operate="onObjectOperate"
-            @create="onAddUser"
-            @delete="onDeleteUser"
-          ></ChatConfigObject>
+            <ChatConfigObject
+              v-show="current === 'object'"
+              v-model="currentUser"
+              :map="map"
+              :is-group="groupConfig?.enabled"
+              @operate="onObjectOperate"
+              @create="onAddUser"
+              @delete="onDeleteUser"
+            ></ChatConfigObject>
 
-          <ChatConfigSelf
-            v-show="current === 'self'"
-            :map="map"
-            @operate="onObjectOperate"
-          ></ChatConfigSelf>
-        </template>
-      </UiTab>
-    </div>
+            <ChatConfigSelf
+              v-show="current === 'self'"
+              :map="map"
+              @operate="onObjectOperate"
+            ></ChatConfigSelf>
+          </template>
+        </UiTab>
+      </div>
+    </ClientOnly>
+
     <div
       ref="chatRef"
       class="relative bg-color z-9 w-78 h-92% <sm:(w-full h-full text-base) aspect-1/2 flex text-xs flex-col"
@@ -203,7 +206,6 @@
 </template>
 
 <script setup lang="ts">
-  import { saveAs } from 'file-saver'
   import { domToPng } from 'modern-screenshot'
   import { CHAT_LIST, CHAT_USER_MAP, GROUP_CONFIG } from '~/constants'
   const msgCount = ref(99)
@@ -458,7 +460,7 @@
         dialogVisible.value = true
         downloadUrl.value = url
       } else {
-        saveAs(url, '微信.png')
+        downloadUtil(url, '微信.png')
       }
     }
   }

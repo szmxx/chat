@@ -1,11 +1,10 @@
 import workerUrl from 'modern-screenshot/worker?url'
 import { createContext, destroyContext, domToPng } from 'modern-screenshot'
-import { saveAs } from 'file-saver'
 import dayjs from 'dayjs'
 import { WEEK_MAP } from '~/config'
 export async function exportImage(dom: HTMLElement, filename = '') {
   const res = await screenshot(dom)
-  saveAs(res, filename)
+  downloadUtil(res, filename)
 }
 export async function screenshot(dom: HTMLElement) {
   const context = await createContext(dom, {
@@ -18,6 +17,15 @@ export async function screenshot(dom: HTMLElement) {
   })
   destroyContext(context)
   return url
+}
+
+export function downloadUtil(blobUrl: string, downloadName?: string) {
+  const a = document.createElement('a')
+  a.download = downloadName!
+  a.href = blobUrl
+  a.target = '_blank'
+  a.click()
+  URL.revokeObjectURL(blobUrl)
 }
 
 export function getRandomInt(min: number, max: number) {

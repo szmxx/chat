@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import Player from 'rrweb-player'
   import 'rrweb-player/dist/style.css'
-  import { saveAs } from 'file-saver'
   const player = ref()
   const container = ref()
   const events = computed(() => ScreenRecorder.events)
@@ -49,7 +48,7 @@
       )
       if (data.value) {
         const url = URL.createObjectURL(data?.value as Blob)
-        saveAs(url, '视频.webm')
+        downloadUtil(url, '视频.webm')
         ScreenRecorder.clear()
       }
       loading.value = false
