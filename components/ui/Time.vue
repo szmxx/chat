@@ -54,7 +54,7 @@
         </div>
       </div>
 
-      <div class="mask"></div>
+      <div class="mask rounded"></div>
     </div>
   </div>
 </template>

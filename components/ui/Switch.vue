@@ -14,16 +14,6 @@
       return props.modelValue
     },
   })
-
-  watch(
-    current,
-    () => {
-      console.log(current.value)
-    },
-    {
-      immediate: true,
-    },
-  )
 </script>
 
 <template>

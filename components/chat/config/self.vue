@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-col gap-y-4">
     <fieldset
-      class="flex border hover:border-primary min-w-auto rounded p-4 flex-col gap-y-4"
+      class="flex border hover:bg-primary/10 min-w-auto rounded p-4 flex-col gap-y-4"
     >
-      <legend pl-2>基本设置</legend>
+      <legend pl-2 font-bold>基本设置</legend>
       <div
         class="w-32 flow flex user flex-col gap-y-2 p-2 shadow-sm rounded bg-default"
       >
@@ -61,11 +61,24 @@
           <div class="i-ion-send text-xs"></div>
         </div>
       </div>
+      <div class="flex w-full gap-x-2 items-center">
+        <input
+          v-model="paipai"
+          placeholder="请输入拍一拍内容"
+          class="border bg-color min-w-0 rounded flex-1 px-2 py-1"
+        />
+        <button
+          class="bg-primary w-fit whitespace-nowrap py-1.5 px-3 text-white rounded"
+          @click="onPai"
+        >
+          <div i-ion-send text-xs></div>
+        </button>
+      </div>
     </fieldset>
     <fieldset
-      class="w-full hover:border-primary flex border rounded p-4 flex-col gap-y-4"
+      class="w-full hover:bg-primary/10 flex border rounded p-4 flex-col gap-y-4"
     >
-      <legend pl-2>图片</legend>
+      <legend pl-2 font-bold>图片</legend>
       <div class="flex w-full gap-y-4 flex-col">
         <div>发送图片</div>
         <UiUpload class="w-fit" @change="onUpload">
@@ -81,9 +94,9 @@
       </div>
     </fieldset>
     <fieldset
-      class="w-full hover:border-primary flex min-w-auto border rounded p-4 flex-col gap-y-4"
+      class="w-full hover:bg-primary/10 flex min-w-auto border rounded p-4 flex-col gap-y-4"
     >
-      <legend pl-2>支付</legend>
+      <legend pl-2 font-bold>支付</legend>
       <div class="whitespace-nowrap">红包</div>
       <div class="flex w-full gap-x-2 items-center">
         <div class="text-hint whitespace-nowrap">金额</div>
@@ -134,9 +147,9 @@
       </button>
     </fieldset>
     <fieldset
-      class="w-full hover:border-primary flex border rounded p-4 flex-col gap-y-4"
+      class="w-full hover:bg-primary/10 flex border rounded p-4 flex-col gap-y-4"
     >
-      <legend pl-2>语音</legend>
+      <legend pl-2 font-bold>语音</legend>
       <div class="flex w-full gap-x-2 items-center">
         <div class="whitespace-nowrap">语音时长</div>
 
@@ -181,13 +194,10 @@
       </div>
     </fieldset>
     <fieldset
-      class="w-full flex hover:border-primary border rounded p-4 flex-col gap-y-4"
+      class="w-full flex hover:bg-primary/10 border rounded p-4 flex-col gap-y-4"
     >
-      <legend pl-2>动作</legend>
+      <legend pl-2 font-bold>动作</legend>
       <div class="flex w-full gap-x-2 items-center">
-        <div class="border rounded px-2 py-1 cursor-pointer" @click="onPai">
-          拍一拍
-        </div>
         <div class="border rounded px-2 py-1 cursor-pointer" @click="onAdd">
           添加好友
         </div>
@@ -296,12 +306,16 @@
       value: audio.value,
     })
   }
+
+  const paipai = ref('大哭')
   function onPai() {
     emit('operate', {
       role: 'user',
       type: 'paiyipai',
+      message: paipai.value,
       status: 0,
     })
+    paipai.value = ''
   }
 
   function onAdd() {

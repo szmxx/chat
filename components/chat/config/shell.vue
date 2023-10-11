@@ -1,18 +1,18 @@
 <template>
   <div class="flex flex-col gap-y-2 w-full">
     <fieldset
-      class="w-full hover:border-primary flex border rounded p-4 flex-col gap-y-4"
+      class="w-full hover:bg-primary/10 flex border rounded p-4 flex-col gap-y-4"
     >
-      <legend pl-2>系统设置</legend>
+      <legend pl-2 font-bold>系统设置</legend>
       <div class="flex w-full relative flex-col gap-y-4">
         <UiRadio v-model="system" :list="systemList" class="flex gap-2">
         </UiRadio>
       </div>
     </fieldset>
     <fieldset
-      class="w-full hover:border-primary flex border rounded p-4 flex-col gap-y-4"
+      class="w-full hover:bg-primary/10 flex border rounded p-4 flex-col gap-y-4"
     >
-      <legend pl-2>组件设置</legend>
+      <legend pl-2 font-bold>组件设置</legend>
 
       <div class="relative flex gap-x-2">
         <div>系统时间</div>

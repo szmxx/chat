@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-col gap-y-4 w-full">
     <fieldset
-      class="w-full flex border hover:border-primary rounded p-4 flex-col gap-y-4"
+      class="w-full flex border hover:bg-primary/10 rounded p-4 flex-col gap-y-4"
     >
-      <legend pl-2>群聊模式</legend>
+      <legend pl-2 font-bold>群聊模式</legend>
       <div class="flex gap-x-2 items-center">
         <div>开启群聊</div>
         <UiSwitch v-model="config.enabled"></UiSwitch>
@@ -31,9 +31,9 @@
     </fieldset>
 
     <fieldset
-      class="w-full flex hover:border-primary border rounded p-4 flex-col gap-y-4"
+      class="w-full flex hover:bg-primary/10 border rounded p-4 flex-col gap-y-4"
     >
-      <legend pl-2>背景设置</legend>
+      <legend pl-2 font-bold>背景设置</legend>
       <div class="flex w-full relative flex-col gap-y-4">
         <div>颜色背景</div>
         <UiColor v-model="currentColor" class="z-99"></UiColor>
@@ -67,9 +67,9 @@
       </div>
     </fieldset>
     <fieldset
-      class="w-full flex border hover:border-primary rounded p-4 flex-col gap-y-4"
+      class="w-full flex border hover:bg-primary/10 rounded p-4 flex-col gap-y-4"
     >
-      <legend pl-2>导出设置</legend>
+      <legend pl-2 font-bold>导出设置</legend>
 
       <div class="flex gap-x-2 items-center">
         <div>仅截取内容</div>
@@ -99,12 +99,16 @@
       </div>
     </fieldset>
     <fieldset
-      class="w-full flex border hover:border-primary rounded p-4 flex-col gap-y-4"
+      class="w-full flex border hover:bg-primary/10 rounded p-4 flex-col gap-y-4"
     >
-      <legend pl-2>动作</legend>
+      <legend pl-2 font-bold>动作</legend>
       <div class="flex gap-x-2 items-center">
         <div>消息免打扰</div>
         <UiSwitch v-model="isDisturb" size="16px"></UiSwitch>
+      </div>
+      <div class="flex gap-x-2 items-center">
+        <div>自动滚动</div>
+        <UiSwitch v-model="autoScroll" size="16px"></UiSwitch>
       </div>
       <div class="flex w-full gap-2 flex-wrap items-center">
         <div
@@ -130,9 +134,9 @@
     </fieldset>
 
     <fieldset
-      class="w-full flex border hover:border-primary rounded p-4 flex-col gap-y-4"
+      class="w-full flex border hover:bg-primary/10 rounded p-4 flex-col gap-y-4"
     >
-      <legend pl-2>其他设置</legend>
+      <legend pl-2 font-bold>其他设置</legend>
       <div class="flex w-full relative gap-x-4 items-center">
         <div>插入时间</div>
         <UiTime v-model="currentDate" type="day">
@@ -173,6 +177,10 @@
       type: Boolean,
       default: false,
     },
+    scroll: {
+      type: Boolean,
+      default: false,
+    },
     group: {
       type: Object as PropType<IGroupConfig>,
       default: () => {},
@@ -185,6 +193,7 @@
     'time',
     'operate',
     'update:disturb',
+    'update:scroll',
     'group',
     'update:modelValue',
   ])
@@ -195,6 +204,15 @@
     },
     get() {
       return props.disturb
+    },
+  })
+
+  const autoScroll = computed<boolean>({
+    set(value) {
+      emit('update:scroll', value)
+    },
+    get() {
+      return props.scroll
     },
   })
 

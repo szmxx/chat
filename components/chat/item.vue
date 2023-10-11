@@ -27,7 +27,7 @@
       </div>
       <div
         v-if="!chat.type"
-        class="message <sm:(px-4!) relative w-fit flex items-center max-w-78% rounded whitespace-break-spaces break-all p-2"
+        class="message <sm:(px-3!) relative w-fit flex items-center max-w-78% rounded whitespace-break-spaces break-all p-2"
         :class="[
           chat.role,
           {

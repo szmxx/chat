@@ -54,12 +54,12 @@
         class="font-bold scale-80 bg-color/60 p-1 rounded flex gap-x-1"
       >
         <div>"{{ map[chat?.user as keyof typeof map]?.name }}"</div>
-        <div>拍了拍我</div>
+        <div>拍了拍我{{ chat.message }}</div>
       </div>
       <div v-else class="flex bg-color/60 p-1 rounded scale-80 gap-x-1">
         <div>我拍了拍</div>
         <div>" {{ map[chat?.user as keyof typeof map]?.name }}"</div>
-        <div>大哭</div>
+        <div>{{ chat.message }}</div>
       </div>
     </template>
     <template v-if="chat.type === 'delete'">

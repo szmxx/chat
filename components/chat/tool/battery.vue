@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="system === 'ios'"
-    class="battery relative bg-info center rounded-0.6 h-full w-auto text-xs px-1 aspect-2/1"
+    class="battery relative bg-info center rounded-0.6 h-full text-xs px-1 w-6"
   >
     <div
       class="absolute h-full bg-dark left-0 rounded-l-0.6 overflow-hidden"

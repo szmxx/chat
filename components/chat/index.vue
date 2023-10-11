@@ -1,10 +1,12 @@
 <template>
-  <div class="w-full h-full center relative flex-col overflow-hidden">
+  <div
+    class="w-full h-full flex gap-x-16 items-center relative overflow-hidden"
+  >
     <ClientOnly>
       <div
         v-show="isShowPanel"
         ref="panelRef"
-        class="w-35% rr-block border-r flex flex-col gap-y-2 <sm:(absolute w-80% bg-default/60 backdrop-blur-8 p-0) z-99 h-full absolute top-0 left-0 p-2"
+        class="w-35% rr-block border-r flex flex-col gap-y-2 <sm:(absolute w-80% bg-default/60 backdrop-blur-8 p-0) z-99 h-full p-2"
       >
         <UiTab
           v-model="currentTab"
@@ -17,6 +19,7 @@
               v-show="current === 'global'"
               v-model="msgCount"
               v-model:disturb="isDisturb"
+              v-model:scroll="autoScroll"
               :group="groupConfig"
               @operate="onThemeOperate"
               @time="onTime"
@@ -52,7 +55,7 @@
 
     <div
       ref="chatRef"
-      class="relative bg-color z-9 w-78 h-92% <sm:(w-full h-full text-base) aspect-1/2 flex text-xs flex-col"
+      class="relative self-center bg-color z-9 w-78 <sm:(w-full h-full text-base) aspect-312/680 flex text-xs flex-col"
     >
       <ChatShell
         :time="currentTime?.join?.(':')"
@@ -121,10 +124,10 @@
         <div class="center w-full gap-x-2">
           <div
             ref="toggleRef"
-            class="border-1.5 rounded-full border-dark p-0.5 cursor-pointer"
+            class="border-2 rounded-full border-dark p-0.5 cursor-pointer"
             @click="onTogglePanel"
           >
-            <div i-ion-ios-wifi class="rotate-90deg scale-80"></div>
+            <div i-ion-ios-wifi class="rotate-90deg scale-90"></div>
           </div>
           <div class="flex-1">
             <input
@@ -134,34 +137,38 @@
               @keyup.enter="onInputChange"
             />
           </div>
-          <div class="<sm:mr-2 border-1.5 rounded-full p-0.1 border-dark">
+          <div class="<sm:mr-1 rounded-full p-0.1">
             <svg
-              t="1695407081290"
-              class="cursor-pointer h-4.5 w-4.5 <sm:(w-6 h-6)"
+              t="1697027916211"
+              class="opacity-90 <sm:(w-6.8 h-6.8) h-5.6 w-5.6"
               viewBox="0 0 1024 1024"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
-              p-id="6666"
+              p-id="13425"
               fill="currentColor"
             >
               <path
+                d="M512 0C230.4 0 0 230.4 0 512s230.4 512 512 512 512-230.4 512-512S793.6 0 512 0z m0 939.2c-235.2 0-427.2-192-427.2-427.2S276.8 84.8 512 84.8s427.2 192 427.2 427.2-192 427.2-427.2 427.2z"
+                p-id="13426"
+              ></path>
+              <path
                 d="M320 363.2m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z"
-                p-id="6668"
+                p-id="13427"
               ></path>
               <path
                 d="M704 363.2m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z"
-                p-id="6669"
+                p-id="13428"
               ></path>
               <path
                 d="M734.4 555.2H289.6c-17.6 0-33.6 8-46.4 20.8s-17.6 33.6-12.8 51.2C256 763.2 376 857.6 512 857.6s256-97.6 281.6-230.4c4.8-17.6 0-33.6-12.8-51.2-12.8-12.8-30.4-20.8-46.4-20.8zM512 772.8c-84.8 0-161.6-56-187.2-132.8H704c-30.4 81.6-107.2 132.8-192 132.8z"
-                p-id="6670"
+                p-id="13429"
               ></path>
             </svg>
           </div>
           <div
-            class="border-1.5 rounded-full center border-dark p-0.5 cursor-pointer"
+            class="border-2 rounded-full center border-dark p-0.5 cursor-pointer"
           >
-            <div i-ion-md-add class="cursor-pointer font-bold"></div>
+            <div i-ion-plus class="cursor-pointer font-bold"></div>
           </div>
         </div>
         <div
@@ -180,7 +187,7 @@
       </div>
     </div>
     <div
-      class="w-35% absolute rr-block gap-y-3 <sm:hidden flex border-l flex-col center right-0 h-full p-2"
+      class="w-35% absolute rr-block gap-y-3 <lg:hidden flex border-l flex-col center right-0 h-full p-2"
     >
       <div
         class="p-2 flex flex-col w-85% gap-y-2 rounded relative z-9 bg-default/20 backdrop-blur-8"
@@ -207,7 +214,7 @@
 
 <script setup lang="ts">
   import { domToPng } from 'modern-screenshot'
-  import { CHAT_LIST, CHAT_USER_MAP, GROUP_CONFIG } from '~/constants'
+  import { CHAT_LIST, CHAT_USER_MAP } from '~/constants'
   const msgCount = ref(99)
   const containRef = ref()
   const inputVal = ref('')
@@ -237,6 +244,7 @@
 
   onMounted(() => {
     const bool = isMobileDevice()
+    console.log(bool)
     if (bool) {
       onClickOutside(
         panelRef,
@@ -325,7 +333,7 @@
       })
     } else {
       addListItem({
-        user: 'user',
+        user: 'self',
         role: 'self',
         type: 'payment',
         price: price,
@@ -387,12 +395,7 @@
     }
   }
 
-  const groupState = useLocalStorage<IGroupConfig>(GROUP_CONFIG, {
-    enabled: false,
-    name: '',
-    number: 3,
-  })
-  const groupConfig = ref<IGroupConfig>(groupState.value)
+  const groupConfig = ref<IGroupConfig>({ enabled: false, name: '', number: 3 })
 
   function onGroup(config: IGroupConfig) {
     groupConfig.value = config
@@ -592,6 +595,7 @@
           role: 'system',
           type: 'paiyipai',
           status: status,
+          message: message,
           user: currentUser.value,
         })
         break
@@ -640,6 +644,27 @@
   }
 
   const isDisturb = ref(false)
+  const autoScroll = ref(false)
+
+  watch(autoScroll, (newVal) => {
+    if (newVal) {
+      scroll()
+    }
+  })
+
+  function scroll() {
+    requestAnimationFrame(() => {
+      const { clientHeight, scrollHeight, scrollTop } = containRef?.value || {}
+      if (scrollHeight - clientHeight - scrollTop > 1) {
+        containRef.value.scrollTop += 1
+        if (autoScroll.value) {
+          setTimeout(() => {
+            scroll()
+          }, 0)
+        }
+      }
+    })
+  }
 </script>
 
 <style lang="scss" scoped>
