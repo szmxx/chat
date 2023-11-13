@@ -123,33 +123,37 @@ export async function transformToVideo(event: H3Event, options: RRvideoConfig) {
     ),
   }
   Object.assign(config?.rrwebPlayer || {}, scaledViewport)
-  const browser = await chromium.launch({
-    headless: config.headless,
-  })
-  const context = await browser.newContext({
-    viewport: scaledViewport,
-    recordVideo: {
-      dir: defaultVideoDir,
-      size: scaledViewport,
-    },
-  })
-  const page = await context.newPage()
-  await page.goto('about:blank')
-  await page.exposeFunction(
-    'onReplayProgressUpdate',
-    (data: { payload: number }) => {
-      config?.onProgressUpdate?.(data?.payload)
-    },
-  )
-  await new Promise<void>((resolve) =>
-    page
-      .exposeFunction('onReplayFinish', () => resolve())
-      .then(() => page.setContent(getHtml(events, config))),
-  )
-  const videoPath = (await page.video()?.path()) || ''
-  await context.close()
-  const stream = fs.createReadStream(videoPath)
-  return sendStream(event, stream)
+  try {
+    const browser = await chromium.launch({
+      headless: config.headless,
+    })
+    const context = await browser.newContext({
+      viewport: scaledViewport,
+      recordVideo: {
+        dir: defaultVideoDir,
+        size: scaledViewport,
+      },
+    })
+    const page = await context.newPage()
+    await page.goto('about:blank')
+    await page.exposeFunction(
+      'onReplayProgressUpdate',
+      (data: { payload: number }) => {
+        config?.onProgressUpdate?.(data?.payload)
+      },
+    )
+    await new Promise<void>((resolve) =>
+      page
+        .exposeFunction('onReplayFinish', () => resolve())
+        .then(() => page.setContent(getHtml(events, config))),
+    )
+    const videoPath = (await page.video()?.path()) || ''
+    await context.close()
+    const stream = fs.createReadStream(videoPath)
+    return sendStream(event, stream)
+  } catch (error) {
+    return error
+  }
 }
 
 export function download(event: H3Event, path: string) {
