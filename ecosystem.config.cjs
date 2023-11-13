@@ -33,7 +33,7 @@ module.exports = {
       ssh_options: 'StrictHostKeyChecking=no',
       'pre-deploy-local': "echo 'This is a local executed command'",
       'post-deploy':
-        'pnpm install --frozen-lockfile && pnpm build && pnpm run pm --env production',
+        'pnpm install && pnpm build && pnpm run pm --env production',
       env: {
         NODE_ENV: 'production',
       },
