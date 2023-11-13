@@ -2,7 +2,6 @@ logs
 *.log
 dist
 node_modules
-.output
 .nuxt
 
 stats.html

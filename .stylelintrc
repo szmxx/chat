@@ -95,7 +95,14 @@
       "transition"
     ]
   },
-  "ignoreFiles": ["node_modules/**", "dist/**", "build/**", ".git/**", "*.js"],
+  "ignoreFiles": [
+    "node_modules/**",
+    "dist/**",
+    "build/**",
+    ".output/**",
+    ".git/**",
+    "*.js"
+  ],
   "overrides": [
     {
       "files": ["*.(html|vue)", "**/*.(html|vue)"],

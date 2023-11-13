@@ -1,0 +1,1 @@
+import{_ as t}from"./_plugin-vue_export-helper.c27b6911.js";import{k as o,l,A as r}from"./entry.b11c0669.js";const s={},c={class:"center h-full w-full flex-col gap-y-2"};function a(e,n){return o(),l("main",c,[r(e.$slots,"default")])}const d=t(s,[["render",a]]);export{d as default};

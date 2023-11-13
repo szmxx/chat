@@ -1,0 +1,7 @@
+{
+  "date": "2023-11-13T10:20:15.825Z",
+  "preset": "node_cluster",
+  "commands": {
+    "preview": "node ./server/index.mjs"
+  }
+}

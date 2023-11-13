@@ -32,8 +32,7 @@ module.exports = {
       path: '/var/www/chat',
       ssh_options: 'StrictHostKeyChecking=no',
       'pre-deploy-local': "echo 'This is a local executed command'",
-      'post-deploy':
-        'pnpm install && pnpm build && pnpm run pm --env production',
+      'post-deploy': 'pnpm install && pnpm run pm --env production',
       env: {
         NODE_ENV: 'production',
       },
