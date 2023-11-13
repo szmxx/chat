@@ -1,12 +1,12 @@
 <template>
-  <div class="flex z-9999">
+  <div class="flex">
     <div ref="timeRef" class="cursor-pointer" @click="onToggle">
       <slot></slot>
     </div>
     <div
       v-show="isShowPanel"
       ref="panelRef"
-      class="flex absolute bottom-110% p-2.5 rounded bg-default shadow-sm"
+      class="flex absolute bottom-110% p-2.5 overflow-hidden rounded bg-default shadow-sm"
       :class="{ 'top-110% bottom-auto': direction === 'bottom' }"
     >
       <div
@@ -183,9 +183,9 @@
   function scrollToDay(index: number, type = 'auto') {
     if (index > 0) {
       setTimeout(() => {
-        dayRef?.value?.children?.[index]?.scrollIntoView?.({
+        dayRef?.value.scrollTo({
           behavior: type,
-          block: 'center',
+          top: (index - 2) * 24,
         })
       }, 0)
     }
@@ -194,9 +194,9 @@
   function scrollToHour(index: number, type = 'auto') {
     if (index > 0) {
       setTimeout(() => {
-        hourRef?.value?.children?.[index]?.scrollIntoView?.({
+        hourRef?.value.scrollTo({
           behavior: type,
-          block: 'center',
+          top: index * 24,
         })
       }, 0)
     }
@@ -205,9 +205,9 @@
   function scrollToMinute(index: number, type = 'auto') {
     if (index > 0) {
       setTimeout(() => {
-        minuteRef?.value?.children?.[index]?.scrollIntoView?.({
+        minuteRef?.value.scrollTo({
           behavior: type,
-          block: 'center',
+          top: index * 24,
         })
       }, 0)
     }

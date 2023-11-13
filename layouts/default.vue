@@ -6,7 +6,7 @@
 -->
 <script setup></script>
 <template>
-  <main class="center bg h-full w-full flex-col gap-y-2">
+  <main class="center h-full w-full flex-col gap-y-2">
     <slot />
   </main>
 </template>

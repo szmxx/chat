@@ -24,7 +24,7 @@
     <div
       v-for="i in 4"
       :key="i"
-      class="w-4px bg-dark scale-x-60 rounded-1 overflow-hidden"
+      class="w-3px <sm:4px bg-dark scale-x-60 rounded-1 overflow-hidden"
       :style="{ height: (i + 1) * 20 + '%' }"
       :class="{ 'bg-info': i > signal }"
     ></div>

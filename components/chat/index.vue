@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="w-full h-full flex gap-x-16 items-center relative overflow-hidden"
-  >
+  <div class="w-full h-full flex gap-x-16 items-center relative">
     <ClientOnly>
       <div
         v-show="isShowPanel"
@@ -110,6 +108,7 @@
           :username="map?.[currentUser]?.name"
           :is-custom-bg="isCustomBg"
           :is-group="groupConfig?.enabled"
+          @click="onOpenImage(item)"
           @avatar="onAvatar"
           @hongbao="onHongbao"
           @payment="onPayment"
@@ -184,6 +183,14 @@
             class="rounded-0.5 w-3 h-3 <sm:(h-4 w-4) border-dark border-1"
           ></div>
         </div>
+      </div>
+
+      <div
+        v-show="currentClick.show"
+        class="absolute w-full transition-all center h-full top-0 left-0 bg-#000 z-999"
+        @click="onOpenImage({})"
+      >
+        <img class="w-full" :src="currentClick.url as string" />
       </div>
     </div>
     <div
@@ -308,6 +315,21 @@
     })
   }
 
+  const currentClick = ref({
+    show: false,
+  })
+  function onOpenImage(item: Record<string, unknown> = {}) {
+    if (item.type === 'image') {
+      currentClick.value = {
+        ...item,
+        show: true,
+      }
+    } else {
+      currentClick.value = {
+        show: false,
+      }
+    }
+  }
   function onAvatar(key: keyof typeof map.value, url: string) {
     if (typeof map.value[key] === 'object') map.value[key].url = url
   }
