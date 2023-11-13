@@ -40,7 +40,6 @@
     "test:unit": "vitest",
     "test:js-dom": "VITEST_DOM_ENV=js-dom pnpm test:unit --run",
     "test": "pnpm test:js-dom --api.port 3060 ",
-    "preinstall": "husky install",
     "lint": "eslint --ext .ts,vue,tsx --ignore-path .gitignore .",
     "style": "stylelint ./**/*.{css,scss,vue}",
     "tslint": "vue-tsc --noEmit",
